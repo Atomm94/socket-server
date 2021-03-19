@@ -11,3 +11,6 @@ socket.on('Notification', (data) => {
     console.log(data)
     socket.emit('hi', 'everyone')
 })
+// socket.on('dashboard_acu', (data) => {
+//   console.log('8888888', data) // "G5p5..."
+// })
