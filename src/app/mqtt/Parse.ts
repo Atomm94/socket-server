@@ -29,6 +29,9 @@ export default class Parse {
             case socketChannels.DASHBOARD_EVENT_STATISTIC:
                 this.eventStatistic(message)
                 break
+            case socketChannels.DASHBOARD_CARDHOLDERS_PRESENSE:
+                this.cardholdersPresense(message)
+                break
             default:
                 break
         }
@@ -79,6 +82,14 @@ export default class Parse {
             socket.sendSocket(message.channel, JSON.stringify(message.data))
         } catch (error) {
             // console.log('error eventStatistic ', error)
+        }
+    }
+
+    public static async cardholdersPresense (message: IMqttSocketMessaging) {
+        try {
+            socket.sendSocket(message.channel, JSON.stringify(message.data))
+        } catch (error) {
+            // console.log('error cardholdersPresense ', error)
         }
     }
 }
