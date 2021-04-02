@@ -25,7 +25,9 @@ export interface IMqttSocketMessaging {
     operator: OperatorType,
     device_topic: string,
     channel: string,
+    user: number,
     company: number,
     device_id: number,
-    data: any
+    data: any,
+    full_socket_channel: string
 }
