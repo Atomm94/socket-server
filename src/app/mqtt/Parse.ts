@@ -15,9 +15,9 @@ export default class Parse {
             message.full_socket_channel += `/${message.user}`
         }
         switch (message.channel) {
-            // case OperatorType.NOTIFICATION:
-            //     this.notification(message)
-            //     break
+            case socketChannels.NOTIFICATION:
+                this.notification(message)
+                break
             case socketChannels.DASHBOARD_ACU:
                 this.changeAcuStatus(message)
                 break
