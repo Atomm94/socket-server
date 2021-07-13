@@ -15,9 +15,9 @@ export default class Parse {
             message.full_socket_channel += `/${message.user}`
         }
         switch (message.channel) {
-            // case OperatorType.NOTIFICATION:
-            //     this.notification(message)
-            //     break
+            case socketChannels.NOTIFICATION:
+                this.notification(message)
+                break
             case socketChannels.DASHBOARD_ACU:
                 this.changeAcuStatus(message)
                 break
@@ -33,6 +33,13 @@ export default class Parse {
             case socketChannels.DASHBOARD_EVENT_STATISTIC:
                 this.eventStatistic(message)
                 break
+            case socketChannels.DASHBOARD_CLOUD_STATUS:
+                this.cloudStatus(message)
+                break
+            case socketChannels.DASHBOARD_DOOR_STATE:
+                this.doorState(message)
+                break
+
             case socketChannels.DASHBOARD_CARDHOLDERS_PRESENSE:
                 this.cardholdersPresense(message)
                 break
@@ -89,6 +96,22 @@ export default class Parse {
             socket.sendSocket(message.full_socket_channel, JSON.stringify(message.data))
         } catch (error) {
             // console.log('error eventStatistic ', error)
+        }
+    }
+
+    public static async cloudStatus (message: IMqttSocketMessaging) {
+        try {
+            socket.sendSocket(message.full_socket_channel, JSON.stringify(message.data))
+        } catch (error) {
+            // console.log('error cloudStatus ', error)
+        }
+    }
+
+    public static async doorState (message: IMqttSocketMessaging) {
+        try {
+            socket.sendSocket(message.full_socket_channel, JSON.stringify(message.data))
+        } catch (error) {
+            // console.log('error doorState ', error)
         }
     }
 
