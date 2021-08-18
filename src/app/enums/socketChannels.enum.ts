@@ -8,6 +8,6 @@ export enum socketChannels {
   DASHBOARD_ACTIVITY = 'dashboard_activity',
   DASHBOARD_CARDHOLDERS_PRESENSE = 'dashboard_cardholders_presense',
   NOTIFICATION = 'notification',
-  ERROR_CHANNEL = 'error_channel'
-
+  ERROR_CHANNEL = 'error_channel',
+  READER_DELETE = 'reader_delete',
 }
