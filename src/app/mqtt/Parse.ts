@@ -46,6 +46,9 @@ export default class Parse {
             case socketChannels.ERROR_CHANNEL:
                 this.errorChannel(message)
                 break
+            case socketChannels.READER_DELETE:
+                this.readerDelete(message)
+                break
             default:
                 break
         }
@@ -130,6 +133,15 @@ export default class Parse {
             socket.sendSocket(message.full_socket_channel, JSON.stringify(message.data))
         } catch (error) {
             // console.log('error errorChannel ', error)
+        }
+    }
+
+    public static async readerDelete (message: IMqttSocketMessaging) {
+        try {
+            const channel = `${message.full_socket_channel}/acu/${message.data.access_points.acus.id}`
+            socket.sendSocket(channel, JSON.stringify(message.data))
+        } catch (error) {
+            // console.log('error readerDelete ', error)
         }
     }
 }
