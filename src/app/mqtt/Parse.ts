@@ -175,7 +175,7 @@ export default class Parse {
 
     public static async extBrdUpdate (message: IMqttSocketMessaging) {
         try {
-            const channel = `${message.full_socket_channel}/acu/${message.data.acus.id}`
+            const channel = `${message.full_socket_channel}/acu/${message.data.acu}`
             socket.sendSocket(channel, JSON.stringify(message.data))
         } catch (error) {
             // console.log('error readerDelete ', error)
