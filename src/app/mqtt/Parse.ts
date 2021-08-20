@@ -49,9 +49,16 @@ export default class Parse {
             case socketChannels.READER_DELETE:
                 this.readerDelete(message)
                 break
+            case socketChannels.READER_UPDATE:
+                this.readerUpdate(message)
+                break
             case socketChannels.EXT_BRD_DELETE:
                 this.extBrdDelete(message)
                 break
+            case socketChannels.EXT_BRD_UPDATE:
+                this.extBrdUpdate(message)
+                break
+
             default:
                 break
         }
@@ -146,9 +153,27 @@ export default class Parse {
         }
     }
 
-    public static async extBrdDelete (message: IMqttSocketMessaging) {
+    public static async readerUpdate (message: IMqttSocketMessaging) {
         try {
             const channel = `${message.full_socket_channel}/acu/${message.data.access_points.acus.id}`
+            socket.sendSocket(channel, JSON.stringify(message.data))
+        } catch (error) {
+            // console.log('error readerDelete ', error)
+        }
+    }
+
+    public static async extBrdDelete (message: IMqttSocketMessaging) {
+        try {
+            const channel = `${message.full_socket_channel}/acu/${message.data.acus.id}`
+            socket.sendSocket(channel, JSON.stringify(message.data))
+        } catch (error) {
+            // console.log('error readerDelete ', error)
+        }
+    }
+
+    public static async extBrdUpdate (message: IMqttSocketMessaging) {
+        try {
+            const channel = `${message.full_socket_channel}/acu/${message.data.acus.id}`
             socket.sendSocket(channel, JSON.stringify(message.data))
         } catch (error) {
             // console.log('error readerDelete ', error)
