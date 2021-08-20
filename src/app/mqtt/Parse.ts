@@ -58,7 +58,9 @@ export default class Parse {
             case socketChannels.EXT_BRD_UPDATE:
                 this.extBrdUpdate(message)
                 break
-
+            case socketChannels.ACCESS_POINT_UPDATE:
+                this.accessPointUpdate(message)
+                break
             default:
                 break
         }
@@ -172,6 +174,15 @@ export default class Parse {
     }
 
     public static async extBrdUpdate (message: IMqttSocketMessaging) {
+        try {
+            const channel = `${message.full_socket_channel}/acu/${message.data.acus.id}`
+            socket.sendSocket(channel, JSON.stringify(message.data))
+        } catch (error) {
+            // console.log('error readerDelete ', error)
+        }
+    }
+
+    public static async accessPointUpdate (message: IMqttSocketMessaging) {
         try {
             const channel = `${message.full_socket_channel}/acu/${message.data.acus.id}`
             socket.sendSocket(channel, JSON.stringify(message.data))
