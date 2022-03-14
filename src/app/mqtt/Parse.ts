@@ -61,6 +61,9 @@ export default class Parse {
             case socketChannels.ACCESS_POINT_UPDATE:
                 this.accessPointUpdate(message)
                 break
+            case socketChannels.GUEST_SET_KEY:
+                this.guestSetKey(message)
+                break
             default:
                 break
         }
@@ -160,7 +163,7 @@ export default class Parse {
             const channel = `${message.full_socket_channel}/acu/${message.data.access_points.acus.id}`
             socket.sendSocket(channel, JSON.stringify(message.data))
         } catch (error) {
-            // console.log('error readerDelete ', error)
+            // console.log('error readerUpdate ', error)
         }
     }
 
@@ -169,7 +172,7 @@ export default class Parse {
             const channel = `${message.full_socket_channel}/acu/${message.data.acus.id}`
             socket.sendSocket(channel, JSON.stringify(message.data))
         } catch (error) {
-            // console.log('error readerDelete ', error)
+            // console.log('error extBrdDelete ', error)
         }
     }
 
@@ -178,7 +181,7 @@ export default class Parse {
             const channel = `${message.full_socket_channel}/acu/${message.data.acu}`
             socket.sendSocket(channel, JSON.stringify(message.data))
         } catch (error) {
-            // console.log('error readerDelete ', error)
+            // console.log('error extBrdUpdate ', error)
         }
     }
 
@@ -187,7 +190,16 @@ export default class Parse {
             const channel = `${message.full_socket_channel}/acu/${message.data.acus.id}`
             socket.sendSocket(channel, JSON.stringify(message.data))
         } catch (error) {
-            // console.log('error readerDelete ', error)
+            // console.log('error accessPointUpdate ', error)
+        }
+    }
+
+    public static async guestSetKey (message: IMqttSocketMessaging) {
+        try {
+            const channel = message.full_socket_channel
+            socket.sendSocket(channel, JSON.stringify(message.data))
+        } catch (error) {
+            // console.log('error guestSetKey ', error)
         }
     }
 }
