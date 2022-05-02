@@ -64,6 +64,10 @@ export default class Parse {
             case socketChannels.GUEST_SET_KEY:
                 this.guestSetKey(message)
                 break
+            case socketChannels.CREDENTIAL_AUTOMAT_MODE:
+                this.credentialAutomatMode(message)
+                break
+
             default:
                 break
         }
@@ -195,6 +199,15 @@ export default class Parse {
     }
 
     public static async guestSetKey (message: IMqttSocketMessaging) {
+        try {
+            const channel = message.full_socket_channel
+            socket.sendSocket(channel, JSON.stringify(message.data))
+        } catch (error) {
+            // console.log('error guestSetKey ', error)
+        }
+    }
+
+    public static async credentialAutomatMode (message: IMqttSocketMessaging) {
         try {
             const channel = message.full_socket_channel
             socket.sendSocket(channel, JSON.stringify(message.data))
