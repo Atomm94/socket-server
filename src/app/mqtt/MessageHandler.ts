@@ -6,7 +6,6 @@ import Parse from './Parse'
 export default class MessageHandler {
     constructor () {
         MQTTBroker.getMessage((topic: ReceiveTopics, message: string) => {
-            console.log('getMessages topic', topic, message)
             switch (topic) {
                 case ReceiveTopics.MQTT_SOCKET:
                     Parse.mqttData(topic, message)
